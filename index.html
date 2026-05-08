@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruth Aimila — Customer Experience Strategist & Operations Leader</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --accent-light: #ff6b6b;
+            --text: #333;
+            --text-light: #666;
+            --bg: #f8f9fa;
+            --white: #ffffff;
+            --gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            --card-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            --hover-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent);
+            z-index: 9999;
+            transition: width 0.1s;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+
+        nav.scrolled {
+            padding: 0.8rem 5%;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient);
+            position: relative;
+            overflow: hidden;
+            padding: 6rem 5% 4rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: rgba(233, 69, 96, 0.1);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 50%;
+            bottom: -100px;
+            left: -100px;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-30px) scale(1.05); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: var(--white);
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            animation: fadeInUp 0.8s ease 0.1s both;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.5s both;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(233, 69, 96, 0.4);
+            background: var(--accent-light);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--white);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image-placeholder {
+            width: 100%;
+            aspect-ratio: 1;
+            background: var(--gradient);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image-placeholder::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.03) 10px,
+                rgba(255,255,255,0.03) 20px
+            );
+            animation: slide 20s linear infinite;
+        }
+
+        @keyframes slide {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50px, -50px); }
+        }
+
+        .about-initials {
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.2);
+            z-index: 1;
+        }
+
+        .about-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .about-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .info-item i {
+            width: 40px;
+            height: 40px;
+            background: rgba(233, 69, 96, 0.1);
+            color: var(--accent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .info-item div {
+            font-size: 0.9rem;
+        }
+
+        .info-item div strong {
+            display: block;
+            color: var(--primary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+
+        /* Skills Section */
+        .skills {
+            background: var(--bg);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skill-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .skill-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .skill-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(233, 69, 96, 0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .skill-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Experience Section */
+        .experience {
+            background: var(--white);
+        }
+
+        .timeline {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            grid-column: 2;
+        }
+
+        .timeline-item:nth-child(even) .timeline-date {
+            grid-column: 1;
+            text-align: right;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 4px solid var(--white);
+            box-shadow: 0 0 0 4px rgba(233, 69, 96, 0.2);
+            z-index: 2;
+        }
+
+        .timeline-content {
+            background: var(--bg);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s;
+        }
+
+        .timeline-content:hover {
+            transform: translateX(10px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content:hover {
+            transform: translateX(-10px);
+        }
+
+        .timeline-date {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .timeline-date .date {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .timeline-date .company {
+            font-size: 1.1rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content .location {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timeline-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .timeline-content ul li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.8rem;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .timeline-content ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Education & Certs */
+        .education {
+            background: var(--bg);
+        }
+
+        .edu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .edu-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s;
+        }
+
+        .edu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .edu-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .edu-card h3 i {
+            color: var(--accent);
+        }
+
+        .edu-item {
+            padding: 1.2rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .edu-item:last-child {
+            border-bottom: none;
+        }
+
+        .edu-item h4 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .edu-item .edu-meta {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .cert-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+
+        .cert-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            padding: 0.5rem;
+            background: var(--bg);
+            border-radius: 8px;
+        }
+
+        .cert-item i {
+            color: var(--accent);
+            font-size: 0.8rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--gradient);
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+            top: -100px;
+            left: -100px;
+        }
+
+        .contact .section-title {
+            color: var(--white);
+        }
+
+        .contact .section-desc {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 3rem auto 0;
+        }
+
+        .contact-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .contact-card:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+        }
+
+        .contact-card i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-light);
+        }
+
+        .contact-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+            }
+
+            .about-grid,
+            .edu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                grid-template-columns: 1fr;
+                padding-left: 50px;
+            }
+
+            .timeline-item:nth-child(even) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-date {
+                grid-column: 1;
+                text-align: left;
+            }
+
+            .timeline-dot {
+                left: 20px;
+                transform: translateX(-50%);
+            }
+
+            .timeline-date {
+                margin-bottom: 1rem;
+            }
+
+            .cert-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Typing effect */
+        .typing-text::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="logo">Ruth<span>.</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-circle" style="font-size: 8px; margin-right: 8px; color: #4ade80;"></i>
+                Open to Remote, Hybrid & On-site Roles
+            </div>
+            <h1>Ruth <span class="highlight">Aimila</span></h1>
+            <p class="hero-subtitle">Customer Experience Strategist & Operations Leader</p>
+            <p class="hero-desc">
+                Results-driven professional with 5+ years of progressive experience across customer support, 
+                operations management, and service delivery in technology-driven and energy organizations.
+            </p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">5+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">2.5K+</span>
+                    <span class="stat-label">Clients Managed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">Daily Interactions</span>
+                </div>
+            </div>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> Get In Touch
+                </a>
+                <a href="#experience" class="btn btn-outline">
+                    <i class="fas fa-briefcase"></i> View My Work
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="section-header reveal">
+            <span class="section-tag">About Me</span>
+            <h2 class="section-title">Professional Summary</h2>
+            <p class="section-desc">A passionate leader dedicated to transforming customer experiences and optimizing operations.</p>
+        </div>
+        <div class="about-grid reveal">
+            <div class="about-image">
+                <div class="about-image-placeholder">
+                    <span class="about-initials">RA</span>
+                </div>
+            </div>
+            <div class="about-content">
+                <h3>Driving Excellence in Customer Operations</h3>
+                <p>
+                    I am a results-driven Customer Experience Strategist and Operations Leader with 5+ years of progressive 
+                    experience across customer support, operations management, and service delivery in technology-driven 
+                    and energy organizations.
+                </p>
+                <p>
+                    My proven track record includes managing high-volume customer operations for 2,500+ clients, 
+                    optimizing digital processes, resolving complex escalations, and leading cross-functional teams. 
+                    I specialize in smart metering operations, CRM platforms, and customer retention strategy.
+                </p>
+                <p>
+                    Beyond operations, I am also a creative writer with published fiction reaching 7,000+ reads, 
+                    bringing a unique blend of analytical thinking and creative communication to every challenge.
+                </p>
+                <div class="about-info">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Location</strong>
+                            Abuja, Nigeria
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>Phone</strong>
+                            +234 811 658 2675
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong>
+                            ruthaimila17@gmail.com
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-language"></i>
+                        <div>
+                            <strong>Languages</strong>
+                            English (C1) · German (Beginner)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="section-header reveal">
+            <span class="section-tag">Core Competencies</span>
+            <h2 class="section-title">What I Bring to the Table</h2>
+            <p class="section-desc">A diverse skill set honed through years of hands-on experience in customer-facing roles.</p>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-card reveal">
+                <div class="skill-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Customer Experience Strategy</h3>
+                <p>Designing and implementing customer-centric strategies that drive satisfaction, retention, and loyalty across digital and physical touchpoints.</p>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3>Operations Management</h3>
+                <p>Leading end-to-end service operations, managing high-volume workflows, and ensuring seamless service delivery for thousands of clients.</p>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Process Improvement</h3>
+                <p>Identifying bottlenecks, designing improved workflows, and significantly reducing error rates and turnaround times.</p>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Smart Metering & Energy</h3>
+                <p>Expert in smart meter operations, prepaid electricity systems, vending management, and post-installation customer support.</p>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon">
+                    <i class="fas fa-users-cog"></i>
+                </div>
+                <h3>Team Leadership</h3>
+                <p>Coordinating cross-functional teams including field technicians, developers, and administrative staff to achieve operational goals.</p>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h3>Escalation Handling</h3>
+                <p>Resolving complex customer escalations with professionalism, empathy, and strategic problem-solving approaches.</p>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3>CRM Systems & Reporting</h3>
+                <p>Proficient in CRM platforms, data analysis, and generating actionable insights for business decision-making.</p>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3>Digital Transformation</h3>
+                <p>Driving digital process optimization and leveraging technology to enhance customer service delivery and operational efficiency.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience" id="experience">
+        <div class="section-header reveal">
+            <span class="section-tag">Career Journey</span>
+            <h2 class="section-title">Professional Experience</h2>
+            <p class="section-desc">A progressive career path demonstrating growth from customer support to strategic operations leadership.</p>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">
+                    <span class="date">Dec 2023 – Oct 2025</span>
+                    <span class="company">De-Haryor Global Services</span>
+                </div>
+                <div class="timeline-content">
+                    <h3>Customer Experience & Operations Manager</h3>
+                    <div class="location"><i class="fas fa-map-marker-alt"></i> Abuja, Nigeria</div>
+                    <ul>
+                        <li>Led end-to-end customer service operations for <strong>2,500+ smart meter customers</strong>, overseeing daily service delivery, complaint resolution, and escalation management</li>
+                        <li>Coordinated cross-functional teams including field technicians, app developers, and administrative staff to resolve technical and operational issues efficiently</li>
+                        <li>Designed and implemented improved service workflows that significantly reduced error rates and turnaround times, directly improving customer satisfaction scores</li>
+                        <li>Managed enterprise vending, account reconfiguration, and post-installation customer support projects, ensuring seamless service continuity</li>
+                        <li>Drove customer retention through structured follow-up systems and proactive issue management</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">
+                    <span class="date">Jun 2023 – Nov 2023</span>
+                    <span class="company">De-Haryor Global Services</span>
+                </div>
+                <div class="timeline-content">
+                    <h3>Customer Service Representative</h3>
+                    <div class="location"><i class="fas fa-map-marker-alt"></i> Abuja, Nigeria</div>
+                    <ul>
+                        <li>Handled high-volume inbound and outbound customer interactions related to smart meter usage, vending errors, and connectivity issues</li>
+                        <li>Logged, tracked, and resolved customer complaints using CRM tools, maintaining accurate service records</li>
+                        <li>Collaborated with internal technical teams and app developers to identify and resolve recurring system and application issues</li>
+                        <li>Educated customers on smart meter usage and prepaid electricity systems, reducing repeat inquiries</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">
+                    <span class="date">Jan 2023 – May 2023</span>
+                    <span class="company">Louer Group</span>
+                </div>
+                <div class="timeline-content">
+                    <h3>Executive Assistant to the CEO</h3>
+                    <div class="location"><i class="fas fa-map-marker-alt"></i> Abuja, Nigeria</div>
+                    <ul>
+                        <li>Provided executive-level administrative and operational support including scheduling, stakeholder communication, and reporting</li>
+                        <li>Supported financial documentation, vendor coordination, and contract reviews, contributing to cost reduction through improved vendor management</li>
+                        <li>Streamlined internal processes that improved overall operational efficiency across the executive office</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">
+                    <span class="date">Jun 2022 – Dec 2022</span>
+                    <span class="company">GetFit Technologies</span>
+                </div>
+                <div class="timeline-content">
+                    <h3>Customer Support Representative</h3>
+                    <div class="location"><i class="fas fa-map-marker-alt"></i> Abuja, Nigeria</div>
+                    <ul>
+                        <li>Managed <strong>100+ customer interactions daily</strong> across multiple communication channels including phone, email, and chat</li>
+                        <li>Resolved service access, subscription, and technical issues, improving first-contact resolution rates</li>
+                        <li>Improved customer retention through personalized support and proactive follow-up</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">
+                    <span class="date">Jul 2021 – Mar 2022</span>
+                    <span class="company">Asuma Outsourcing Services</span>
+                </div>
+                <div class="timeline-content">
+                    <h3>Customer Support Associate</h3>
+                    <div class="location"><i class="fas fa-map-marker-alt"></i> Uyo, Nigeria</div>
+                    <ul>
+                        <li>Provided inbound and outbound customer service for multiple client accounts, handling inquiries, complaints, refunds, and escalations</li>
+                        <li>Maintained accurate customer records and service reports in compliance with client SLA requirements</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">
+                    <span class="date">Mar 2020 – Jun 2021</span>
+                    <span class="company">Centre for Youth Mental Health</span>
+                </div>
+                <div class="timeline-content">
+                    <h3>Office Manager</h3>
+                    <div class="location"><i class="fas fa-map-marker-alt"></i> Lokoja, Nigeria</div>
+                    <ul>
+                        <li>Managed daily administrative and office operations, ensuring smooth organizational functioning</li>
+                        <li>Implemented staff scheduling systems that improved operational efficiency and reduced scheduling conflicts</li>
+                        <li>Coordinated recruitment, onboarding, and internal documentation processes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="education" id="education">
+        <div class="section-header reveal">
+            <span class="section-tag">Learning & Growth</span>
+            <h2 class="section-title">Education & Certifications</h2>
+            <p class="section-desc">Continuously investing in professional development to stay ahead in a rapidly evolving industry.</p>
+        </div>
+        <div class="edu-grid">
+            <div class="edu-card reveal">
+                <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+                <div class="edu-item">
+                    <h4>B.Sc. (Ed) Social Studies and Education</h4>
+                    <div class="edu-meta">
+                        <i class="fas fa-university" style="margin-right: 5px;"></i>
+                        Prince Abubakar Audu University (Formerly Kogi State University), Nigeria
+                        <br>
+                        <i class="fas fa-calendar" style="margin-right: 5px;"></i>
+                        2015 – 2019
+                    </div>
+                </div>
+            </div>
+            <div class="edu-card reveal">
+                <h3><i class="fas fa-certificate"></i> Professional Development</h3>
+                <div class="cert-list">
+                    <div class="cert-item"><i class="fas fa-check-circle"></i> Blue Ocean Strategy</div>
+                    <div class="cert-item"><i class="fas fa-check-circle"></i> Customer Relationship Management</div>
+                    <div class="cert-item"><i class="fas fa-check-circle"></i> Talent Acquisition Strategy</div>
+                    <div class="cert-item"><i class="fas fa-check-circle"></i> Cultural Intelligence</div>
+                    <div class="cert-item"><i class="fas fa-check-circle"></i> Software Development Fundamentals</div>
+                    <div class="cert-item"><i class="fas fa-check-circle"></i> Entrepreneurship & Customer Discovery</div>
+                    <div class="cert-item"><i class="fas fa-check-circle"></i> Finance: Time Value of Money</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-header reveal">
+            <span class="section-tag" style="color: var(--accent-light);">Let's Connect</span>
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-desc">Open to remote, hybrid, and on-site roles. Willing to travel and work across regions.</p>
+        </div>
+        <div class="contact-grid">
+            <a href="mailto:ruthaimila17@gmail.com" class="contact-card reveal">
+                <i class="fas fa-envelope"></i>
+                <h3>Email</h3>
+                <p>ruthaimila17@gmail.com</p>
+            </a>
+            <a href="tel:+2348116582675" class="contact-card reveal">
+                <i class="fas fa-phone"></i>
+                <h3>Phone</h3>
+                <p>+234 811 658 2675</p>
+            </a>
+            <a href="#" class="contact-card reveal">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Location</h3>
+                <p>Abuja, Nigeria</p>
+            </a>
+            <a href="#" class="contact-card reveal">
+                <i class="fas fa-pen-nib"></i>
+                <h3>Creative Writing</h3>
+                <p>Published Fiction (7,000+ reads)</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Ruth Aimila. Crafted with passion for excellence in customer experience.</p>
+    </footer>
+
+    <script>
+        // Scroll Progress
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (scrollTop / scrollHeight) * 100;
+            scrollProgress.style.width = scrolled + '%';
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Counter animation for stats
+        const statNumbers = document.querySelectorAll('.stat-number');
+        const animateCounter = (el) => {
+            const text = el.textContent;
+            const num = parseFloat(text);
+            const suffix = text.replace(/[0-9.]/g, '');
+            const duration = 2000;
+            const start = 0;
+            const startTime = performance.now();
+
+            const update = (currentTime) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                const current = start + (num - start) * easeOut;
+                
+                if (Number.isInteger(num)) {
+                    el.textContent = Math.floor(current) + suffix;
+                } else {
+                    el.textContent = current.toFixed(1) + suffix;
+                }
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            };
+
+            requestAnimationFrame(update);
+        };
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statNumbers.forEach(stat => statsObserver.observe(stat));
+    </script>
+</body>
+</html>
